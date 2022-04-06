@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <title>aaaa</title>
+    <meta charset="utf-8">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<title>aaaa</title>
 </head>
-  <body>
- <div class="jumbotron text-center">
-    <h1>Add product</h1>
-</div>
+<body>
+      <div class="jumbotron text-center">
+      <h1>Add product</h1></div>
+    
 <div class="container">
-    <div class="row">
+        <div class="row">
         <div class="col-12">
-           <form id='product_form' class="form-horizontal" method="POST" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="productType" class="control-label col-sm-0"></label>
-    <div class="col-sm-4">
-
-           <div class="add">
-    <nav class='place-nav'>
-      <div>
-           <div class="col-12">
+<form id='product_form' class="form-horizontal" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+        <div class="col-sm-4">
+        <div class="add">
+<nav class='place-nav'>
+    <div class="col-12">
             
-        <button type="submit" class='place-buttons' @click.prevent="save_button">Save</button>
-        <button type="reset" id='cancel-product-btn' class='place-buttons' @click.prevent="cancel_button">Cancel</button>
-        </div>
-      </div>
-    </nav>
-    <hr>
-        
-                
+    <button type="submit" class='place-buttons' @click.prevent="save_button">Save</button>
+    <button type="reset" id='cancel-product-btn' class='place-buttons' @click.prevent="cancel_button">Cancel</button>
+         
+    </div>
+</nav>
             <div class="alert alert-danger" role="alert" id="message" style="display: none;">
                 
             </div>
@@ -45,174 +40,47 @@
                 <label for="price">Price $</label>
                 <input type="number" step="0.01" class="form-control" id="price" required>
             </div>
-            
-            <label for="productType">Type</label>
-            <select id="productType" class="form-control" required>
-                <option value="dvd">DVD</option>
-                <option value="book">Book</option>
-                <option value="furniture">Furniture</option>
-               </select>
+            <div class="form-group">
+               <label for="productType" class="control-label col-sm-0">Type</label>
+               <select name="productType" id="productType" class="form-control" required>
+               <option value="" selected>Select Product type</option>
+               <option value="dvd">DVD</option>
+               <option value="book">Book</option>
+               <option value="furniture">Furniture</option>
+            </select>
+            </div>
             </div>
             </div>
             </div>
 
-</form>
-<style>
- #noBook,#noDVD,#noFurniture {display: flex none ; } </style>
- <label for="attribute">Attribute</label>
- 
- </div>
-<div id="noBook">
-<div class="form-control">
-                <label for="weight">Weight</label>
-                <input type="number" step="0.01" class="form-control" id="weight" required>
-            </div>
- 
-<div id="noDVD">
+
+<label for="attribute">Attribute</label>
+<span class="DVD">
 <div class="form-control">
                 <label for="size">Size (MB)</label>
                 <input type="number" step="0.01" class="form-control" id="size" required>
-        </div>
-</div>
-<div id="noFurniture">
+            </div>
+        
+</span>
+<span class="Book">
+<div class="form-control">
+                <label for="weight">Weight</label>
+                <input type="number" class="form-control" id="weight" required>
+            </div>
+            
+</span>
+<span class="Furniture">
 <div class="form-control">
                 <label for="height">Height</label>
-                <input type="number" step="0.01" class="form-control" id="height" required>
+                <input type="number" class="form-control" id="height" required>
                 <label for="width">Width</label>
-                <input type="number" step="0.01" class="form-control" id="width" required>
+                <input type="number"  class="form-control" id="width" required>
                 <label for="length">Length</label>
-                <input type="number" step="0.01" class="form-control" id="length" required>
+                <input type="number"  class="form-control" id="length" required>
             </div>
-            </div>
+</span>
+</form>
 </div> 
-          
-        </div>
-    </div>
-    
- 
-
-<script>
-import utils from "../utils.js";
-export default {
-  name: 'ProductAdd',
-  components: {
-  },
-  data() {
-    return {
-      dvd: 0,
-      book: 0,
-      furniture: 0,
-    }
-  },
-  methods: {
-    type_dvd() {
-      let type = document.getElementById('productType').value;
-      if(type === 'dvd') {
-        this.dvd = 1;
-        this.book = 0;
-        this.furniture = 0;
-      } else if (type === 'book') {
-        this.dvd = 0;
-        this.book = 1;
-        this.furniture = 0;
-      } else if (type === 'furniture'){
-        this.dvd = 0;
-        this.book = 0;
-        this.furniture = 1;
-      } else {
-        this.dvd = 0;
-        this.book = 0;
-        this.furniture = 0;
-      }
-    },
-    save_button() {
-      let new_product = {};
-      if(document.getElementById('sku').value === "") 
-        this.empty_fields();
-      else {
-        this.clear_error_msg_box();
-        new_product.sku = document.getElementById('sku').value;
-      }
-      if(document.getElementById('name').value === "") 
-        this.empty_fields();
-      else {
-        this.clear_error_msg_box();
-        new_product.name = document.getElementById('name').value;
-      }
-      if(document.getElementById('price').value === "") 
-        this.empty_fields();
-      else {
-        if(isNaN(document.getElementById('price').value)===true)
-          this.wrong_data();
-          else {
-            this.clear_error_msg_box();
-            new_product.price = document.getElementById('price').value;
-          }
-      }
-      
-      if(this.dvd === 0 && this.book === 0 && this.furniture === 0)
-        this.empty_fields();
-      else if(this.dvd === 1) 
-      {
-        new_product.productType = 'DVD';
-        if (document.getElementById('size').value === '') {
-          this.empty_fields();
-        } else {
-          this.clear_error_msg_box();
-          new_product.size = document.getElementById('size').value;
-        }
-      } else if(this.book === 1) {
-        new_product.productType = 'Book';
-        if (document.getElementById('weight').value === '') {
-          this.empty_fields();
-        } else {
-          this.clear_error_msg_box();
-          new_product.weight = document.getElementById('weight').value;
-        }
-      } else if(this.furniture === 2) {
-        new_product.productType = 'Furniture';
-        if (document.getElementById('height').value === '' || document.getElementById('width').value === '' || document.getElementById('length').value === '') {
-          this.empty_fields();
-        } else {
-          if(isNaN(document.getElementById('height').value)===true || isNaN(document.getElementById('width').value)===true || isNaN(document.getElementById('length').value)===true)
-            { 
-              this.wrong_data();
-            } else {
-              this.clear_error_msg_box();
-              new_product.height = document.getElementById('height').value;
-              new_product.width = document.getElementById('width').value;
-              new_product.p_length = document.getElementById('length').value;
-            }
-        }
-      }
-      if(document.getElementById('error_message').innerHTML === '') {
-        let url = utils.url;
-        let requestParameters = { ...utils.globalRequestParameters };
-        requestParameters.method = "POST";
-        requestParameters.body = JSON.stringify(new_product);
-        fetch(url + "add-product", requestParameters)
-          .then((res) => {
-              console.log(res);
-              this.$store.dispatch("addProduct", new_product);
-              this.$router.push('/');
-          });
-      }
-    },
-    cancel_button() {
-      this.$router.push('/');
-    },
-    empty_fields() {
-      document.getElementById('error_message').innerHTML = 'Please, submit required data';
-    },
-    wrong_data() {
-      document.getElementById('error_message').innerHTML = 'Please, provide the data of indicated type';
-    },
-    clear_error_msg_box() {
-      document.getElementById('error_message').innerHTML = '';
-    }
-  },
-}
-</script>
 
 <style scoped>
 #product_form {
@@ -240,6 +108,9 @@ table {
 }
 </style>
  
-  
+</div>
+</div>
+
+
 </body>
 </html>
