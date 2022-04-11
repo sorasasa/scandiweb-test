@@ -10,7 +10,7 @@ for(int i=0; i<=2;i++){
 
 $(document).ready(() => {function getProducts( ){$('.products').html('');
 $.get('/products/get', function(products, status)
-{if(Array.isArray(products)) products.forEach(product => {$('.products').append(`
+{(Array.isArray(products)); products.forEach(product => {$('.products').append(`
             <div class="col-3 pb-4">
             <div class="card">
             <div class="card-body">
