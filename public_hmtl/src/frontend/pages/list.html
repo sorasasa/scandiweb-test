@@ -16,12 +16,12 @@
 </nav>
 <form method ="post" action="" id='product_form'>
         <div class="form-check-inline">
-        <div class='box' v-for="product in get_Products" :key=product>
+        <div class='box' v-for="product in Products" :key=product>
             
         <div class="delete-checkbox">
-        <input type="checkbox" id="get_Products.sku" click="setDelete(product.sku)">
+        <input type="checkbox" id="product" name="product[]" value="product">
         </div>
-                <label for="get_Products.sku"></label>
+                <label for="product"></label>
         <div style='text-align: center;'>
         <div class="products col-12 row"> 
                 <div>{{product.sku}}</div>
