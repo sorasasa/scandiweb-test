@@ -8,35 +8,26 @@ for(int i=0; i<=2;i++){
   }
 }
 
-$(document).ready(() => {function getProducts( ){$('.products').html('');
-$.get('/products/get', function(products, status)
-{(Array.isArray(products)); products.forEach(product => {$('.products').append(`
-            <div class="col-3 pb-4">
-            <div class="card">
-            <div class="card-body">
-            <div class="form-check-inline">
-<label class="form-check-label">
-     <input type="checkbox" class="form-check-input" name="products[]"
-     value="${product.sku},${product.name},${product.price},${product.type},${product.attribute}">
-</label>
-    </div>
-            <h4 class="card-title">${product.sku}</h4>
-            <p class="card-text">${product.name}</p>
-            <p class="card-text">${product.price}$</p>
-            <p class="card-text">${product.type}</p>
-            <p class="card-text"> ${product.attribute}
-== 0 ? 'Size: ' : product.type == 1 ? 'Weight: ' : product.type == 2 ? 'Dimension: '}</p>
-    </div>
-    </div>
-    </div>
-                `);
-            });
-        });
-    }
 
+
+window.addEventListener('load',() => {
+    const params=(new URL (document.location)). SearchParams;
+    const sku = params.get('sku');
+    const name = params.get('name');
+    const price = params.get('price');
+    const size = params.get('size');
+    const weight = params.get('weight');
+    const height = params.get('height');
+    const width = params.get('width');
+    const length = params.get('length');
     
-let timeout;
-
-function myFunction() {timeout = setTimeout(function() { document.getElementById('yellow').style.display = 'block'; }, 2000)}
-
+    document.getElementById('result-name').innerHTML=sku;
+    document.getElementById('result-sku').innerHTML=name;
+    document.getElementById('result-price').innerHTML=price;
+    document.getElementById('result-size').innerHTML=size;
+    document.getElementById('result-weight').innerHTML=weight;
+    document.getElementById('result-height').innerHTML=height;
+    document.getElementById('result-width').innerHTML=width;
+    document.getElementById('result-length').innerHTML=length;
+    
 });
