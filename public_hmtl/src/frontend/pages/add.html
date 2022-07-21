@@ -4,113 +4,313 @@
     <meta charset="utf-8">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<title>aaaa</title>
+  <link rel="stylesheet"/>
+<title>Add product</title>
 </head>
+
 <body>
+  
       <div class="jumbotron text-center">
       <h1>Add product</h1></div>
     
 <div class="container">
         <div class="row">
         <div class="col-12">
-<form id='product_form' class="form-horizontal" method="POST" enctype="multipart/form-data">
+<form class = "formMain" id="product_form" action="/list.html" method="POST" novalidate>
         <div class="form-group">
         <div class="col-sm-4">
         <div class="add">
-<nav class='place-nav'>
-    <div class="col-12">
-            
-    <button type="submit" class='place-buttons' @click.prevent="save_button">Save</button>
-    <button type="reset" id='cancel-product-btn' class='place-buttons' @click.prevent="cancel_button">Cancel</button>
-         
-    </div>
+<nav class="place-nav">
+    <div class="col-12">   
+    <div class="buttons">
+                <button class="save buttons-style">Save</button>
+                <button id="cancel" class="buttons-style">Cancel</button>
+            </div>
+     </div>
 </nav>
-            <div class="alert alert-danger" role="alert" id="message" style="display: none;">
-                
-            </div>
-            <div class="form-group">
-                <label for="sku">SKU</label>
-                <input type="text" class="form-control" id="sku" required>
-            </div>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name"  required>
-            </div>
-            <div class="form-group">
-                <label for="price">Price $</label>
-                <input type="number" step="0.01" class="form-control" id="price" required>
-            </div>
-            <div class="form-group">
-               <label for="productType" class="control-label col-sm-0">Type</label>
-               <select name="productType" id="productType" class="form-control" required>
-               <option value="" selected>Select Product type</option>
-               <option value="dvd">DVD</option>
-               <option value="book">Book</option>
-               <option value="furniture">Furniture</option>
-            </select>
-            </div>
-            </div>
-            </div>
-            </div>
-
-
-<label for="attribute">Attribute</label>
-<span class="DVD">
-<div class="form-control">
-                <label for="size">Size (MB)</label>
-                <input type="number" step="0.01" class="form-control" id="size" required>
-            </div>
-        
-</span>
-<span class="Book">
-<div class="form-control">
-                <label for="weight">Weight</label>
-                <input type="number" class="form-control" id="weight" required>
-            </div>
-            
-</span>
-<span class="Furniture">
-<div class="form-control">
-                <label for="height">Height</label>
-                <input type="number" class="form-control" id="height" required>
-                <label for="width">Width</label>
-                <input type="number"  class="form-control" id="width" required>
-                <label for="length">Length</label>
-                <input type="number"  class="form-control" id="length" required>
-            </div>
-</span>
-</form>
-</div> 
-
-<style scoped>
-#product_form {
-  margin: 20px;
-}
-table {
-  padding-bottom: 50px;
-  border-spacing:0 15px;
-}
-.please {
-  font-weight: bold;
-}
-#error_message {
-  font-weight: bold;
-  color: tomato;
-  font-size: 120%;
-}
-#save-product-btn {
-  background-color: green;
-  color: white;
-}
-#cancel-product-btn {
-  background-color: red;
-  color: white;
-}
-</style>
+          <hr>
  
+            <div class="form-group">
+                <label for="sku" >SKU*</label>
+                <input type="text" class="form-control" name="sku" id="sku"  placeholder="#sku" onfocusout= "validateSKU()" >
+              <div class = "helper_text"></div>
+            </div>
+          <br>
+            <div class="form-group">
+                <label for="name">Name*</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="#name" onfocusout= "validateName()" >
+              <div class = "helper_text"></div>
+            </div>
+          <br>
+            <div class="form-group">
+                <label for="price">Price ($)*</label>
+                <input type="number" step="0.01" class="form-control" id="price" placeholder="#price" onfocusout= "validatePrice()" >
+            <div class = "helper_text"></div>
+            </div>
+          <br>
+           </div>
+          <div class = "dynamic_form">
+               <label for="type_switcher" class="control-label col-sm-0">Type*</label>
+               <select id = "productType" class="form-control"> 
+               <option value="" selected disabled>Select Product</option>
+               <option value="DVD">DVD</option>
+               <option value="Book">Book</option>
+               <option value="Furniture">Furniture</option>
+            </select>
+          </form>
+          <br><br>
+         
+                
+      <!--Form for DVD-->          
+<div class= "DVD_form">
+<form name = "formDVD" id = "DVD" novalidate>
+<div class="form-control">
+               <label for="size">Size (MB)*</label>
+               <input type="number"  class="form-control" id="size" name = "size" placeholder = "Size(MB)" onfocusout= "validateSize()">
+    <div class = "helper_text"></div>
+<p class = "product_description">Please, provide size</p>
+  </div>
+</form>
+      </div> 
+  
+  <!--form for book-->
+<div class="Book_form">
+<form name = "formBook" id = "Book" novalidate>
+<div class="form-control">
+               <label for="weight">Weight (KG)*</label>
+               <input type="number" class="form-control" id="weight" name = "weight" placeholder = "Weight(KG)" onfocusout= "validateWeight()">
+<div class = "helper_text"></div>    
+<p class = "product_description">Please, provide weight</p>
 </div>
+</form>  
+ </div> 
+  
+ <!--Form for Furniture-->
+<div class = "Furniture_form">
+<form name = "formFurniture" id = "Furniture" novalidate>
+<div class="form-control">
+                <label for="height">Height (CM)*</label>
+                <input type="number" class="form-control" id="height" name = "furniture_height" placeholder = "Height(CM)" onfocusout= "validateHeight()">
+<div class = "helper_text"></div>
+<br>
+                <label for="width">Width (CM)*</label>
+                <input type="number"  class="form-control" id="width" name = "furniture_width" placeholder = "Width(CM)" onfocusout= "validateWidth()">
+<div class = "helper_text"></div>
+<br>
+                <label for="length">Length (CM)*</label>
+                <input type="number"  class="form-control" id="length" name = "furniture_length" placeholder = "Length(CM)" onfocusout= "validateLength()">
+<div class = "helper_text"></div>
+<p class = "product_description">Please, provide dimensions</p>
 </div>
+</form>  
+ <br>  
+  </div> 
+<div class = "required_fields">*required fields</div> 
+
+</div> 
+ </div></div></div></div></div>
+   <style>
+ #DVD,#Book,#Furniture {
+    display: none;
+}
+.required_fields {
+  color: red;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+input[type="search"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
 
 
-</body>
-</html>
+/**
+ * 1. Remove default vertical scrollbar in IE 6/7/8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+
+textarea {
+    overflow: auto;
+    /* 1 */
+    vertical-align: top;
+    /* 2 */
+}
+
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+img {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+.wrapper {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+
+/* Header styles start */
+
+.header-wrapper {
+    padding: 30px 70px;
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    border-bottom: #000 solid 1px;
+}
+
+.main-title {
+    font-size: 40px;
+}
+
+.buttons {
+    padding-top: 10px;
+}
+
+.buttons-style {
+    text-transform: uppercase;
+    border-radius: 5px;
+    background: rgb(221, 221, 221);
+    font-size: 21px;
+    margin-right: 7px;
+}
+
+.buttons:last-child {
+    margin-right: 0px;
+}
+
+.buttons-style:hover {
+    background: rgb(187, 186, 186);
+}
+
+
+/* Header styles end */
+
+
+/* Main - Product list styles start */
+
+.grid {
+    display: grid;
+    grid-template-columns: 250px 250px 250px 250px;
+    grid-column-gap: 80px;
+    grid-row-gap: 50px;
+}
+
+.product-box {
+    border: #000 solid 2px;
+    border-radius: 5px;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    text-align: center;
+}
+
+.delete-checkbox {
+    /* margin: 25px 0px 0px 30px; */
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.info {
+    padding-top: 60px;
+    padding-right: 30px;
+    font-size: 21px;
+    line-height: 30px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.main {
+    margin-bottom: 200px;
+}
+
+
+/* Main - Product list styles end */
+
+
+/* Footer styles start */
+
+.footer-wrapper {
+    border-top: black solid 1px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-title {
+    margin-top: 21px;
+    font-size: 22px;
+}
+
+
+/* other styles */
+
+.labels {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.desc-font {
+    font-weight: 700;
+}</style>
+<script type="text/javascript" src="add.js"></script>
+    <script src="/js/add.js"></script>
+
+ </body>
+ </html>
